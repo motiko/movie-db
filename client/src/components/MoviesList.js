@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'unsemantic';
-import {
-  Card,
-  CardDeck,
-  CardHeader,
-  Badge,
-  CardText,
-  CardBody,
-  CardSubtitle,
-  ButtonGroup,
-  Button
-} from 'reactstrap';
+import { CardDeck } from 'reactstrap';
 import PropTypes from 'prop-types';
-import MovieRating from './MovieRating';
+import MovieCard from './MovieCard';
 
 class MoviesList extends Component {
   static propTypes = {
@@ -25,38 +15,17 @@ class MoviesList extends Component {
   };
 
   render() {
-    const { movies, userEmail } = this.props;
+    const { movies, userId } = this.props;
     return (
       <CardDeck>
         {movies.map(movie => (
           <Grid
-            key={`${movie.id}_${userEmail}`}
+            key={`${movie.id}_${userId}`}
             desktop="50"
             tablet="100"
             mobile="100"
           >
-            <Card className="movie-card">
-              <CardHeader>{movie.title}</CardHeader>
-              <CardBody>
-                <CardSubtitle>
-                  <MovieRating
-                    score={movie.score}
-                    movieId={movie.id}
-                    isEditable={!!userEmail}
-                  />
-                </CardSubtitle>
-                {movie.category_name && (
-                  <Badge data-cy="movie-category"> {movie.category_name}</Badge>
-                )}
-                <CardText>{movie.description}</CardText>
-                {this.props.userEmail && (
-                  <ButtonGroup>
-                    <Button data-cy="edit-movie">Edit</Button>
-                    <Button data-cy="delete-movie">Delete</Button>
-                  </ButtonGroup>
-                )}
-              </CardBody>
-            </Card>{' '}
+            <MovieCard movie={movie} />
           </Grid>
         ))}
       </CardDeck>
@@ -64,7 +33,7 @@ class MoviesList extends Component {
   }
 }
 
-export default connect(({ movies, userEmail }) => ({
+export default connect(({ movies, userId }) => ({
   movies,
-  userEmail
+  userId
 }))(MoviesList);

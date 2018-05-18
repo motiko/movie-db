@@ -3,6 +3,7 @@ import MoviesService from '../MoviesService';
 
 const logIn = createAction('LOGIN', MoviesService.login);
 const logOut = createAction('LOGOUT', MoviesService.logout);
+const deleteMovie = createAction('DELETE_MOVIE', MoviesService.deleteMovie);
 const setPage = createAction('SET_PAGE');
 const fetchMovies = createAction(
   'FETCH_MOVIES',
@@ -29,4 +30,4 @@ const fetchMovies = createAction(
     return { movies, totalPages, message };
   }
 );
-export { logIn, logOut, setPage, fetchMovies };
+export { logIn, logOut, setPage, fetchMovies, deleteMovie };

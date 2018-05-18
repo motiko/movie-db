@@ -9,7 +9,7 @@ class MovieController < ApplicationController
   class AuthorizationError < StandardError; end
 
   rescue_from AuthorizationError do
-    render json: { error: "User not authorized to perform this action on #{params[:id]}" }, status: :unauthorized
+    render json: { error: "User not authorized to perform this action on #{params[:id]}" }, status: :forbidden
   end
 
   rescue_from ActiveRecord::RecordInvalid do |ex|

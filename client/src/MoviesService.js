@@ -53,9 +53,10 @@ function login(email, password) {
     .then(({ jwt }) => {
       localStorage.setItem('token', jwt);
       localStorage.setItem('email', email);
+      const userId = getId(jwt);
       //Helping password managers to Make sure form submission is clear https://www.chromium.org/developers/design-documents/create-amazing-password-forms
       window.history.pushState({}, 'login');
-      return { authenticated: email };
+      return { userEmail: email, userId };
     })
     .catch(error => {
       if (error.number === 404)
@@ -72,13 +73,22 @@ function rate(movieId, score) {
   }).then(checkErrors);
 }
 
+function deleteMovie(movieId) {
+  return fetch(`/movie/${movieId}`, { headers: headers(), method: 'DELETE' })
+    .then(checkErrors)
+    .then(() => ({ movieId, removed: true }));
+}
+
 function logout() {
   localStorage.removeItem('email');
   localStorage.removeItem('token');
 }
 
 function loggedInUser() {
-  return localStorage.getItem('email');
+  const userEmail = localStorage.getItem('email');
+  const jwt = localStorage.getItem('token');
+  if (jwt) return { userEmail, userId: getId(jwt) };
+  return { userEmail: '', userId: null };
 }
 
 function checkErrors(response) {
@@ -102,8 +112,23 @@ function slidingSession(response) {
   return response;
 }
 
-const MoviesService = { list, login, logout, rate, listCategories };
+const MoviesService = {
+  list,
+  login,
+  logout,
+  rate,
+  listCategories,
+  deleteMovie
+};
 
 export default MoviesService;
 
 export { loggedInUser };
+
+function getId(token) {
+  if (!token || !token.includes('.')) return null;
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace('-', '+').replace('_', '/');
+  const payload = JSON.parse(window.atob(base64));
+  return payload.sub;
+}
