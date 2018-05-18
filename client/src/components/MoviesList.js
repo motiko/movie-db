@@ -35,7 +35,7 @@ class MoviesList extends Component {
             tablet="100"
             mobile="100"
           >
-            <Card style={{ marginTop: '1.5em' }}>
+            <Card className="movie-card">
               <CardHeader>{movie.title}</CardHeader>
               <CardBody>
                 <CardSubtitle>
@@ -46,13 +46,7 @@ class MoviesList extends Component {
                   />
                 </CardSubtitle>
                 {movie.category_name && (
-                  <Badge
-                    data-cy="movie-category"
-                    style={{ marginBottom: '0.8em' }}
-                  >
-                    {' '}
-                    {movie.category_name}
-                  </Badge>
+                  <Badge data-cy="movie-category"> {movie.category_name}</Badge>
                 )}
                 <CardText>{movie.description}</CardText>
                 {this.props.userEmail && (

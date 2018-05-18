@@ -60,15 +60,7 @@ class RatingFilter extends Component {
         </DropdownToggle>
         <DropdownMenu right>
           <DropdownItem>
-            <h6
-              style={{
-                marginBottom: '0px',
-                marginTop: '3px'
-              }}
-              className="text-muted float-left"
-            >
-              From{' '}
-            </h6>
+            <h6 className="text-muted float-left select-rating-label">From </h6>
             <StarRatingComponent
               name={'min'}
               starCount={5}
@@ -82,7 +74,7 @@ class RatingFilter extends Component {
           <DropdownItem>
             <h6
               style={{ marginBottom: '0px', marginTop: '3px' }}
-              className="text-muted float-left"
+              className="text-muted float-left select-rating-label"
             >
               To{' '}
             </h6>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Alert, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { setPage } from './actionCreators';
 
@@ -26,20 +26,12 @@ class MoviesPagination extends Component {
 
   render() {
     const { curPage, totalPages } = this.props;
-    if (totalPages === 0) {
-      return (
-        <Alert color="light">
-          {' '}
-          No movies to show. Adjust search criteria or create new movie.{' '}
-        </Alert>
-      );
-    }
-    if (totalPages === 1) {
+    if (totalPages <= 1) {
       return null;
     }
     const displayPages = visiblePages(curPage, totalPages);
     return (
-      <Pagination style={{ marginTop: '1.5em' }}>
+      <Pagination className="pagination" style={{ marginTop: '1.5em' }}>
         <PaginationItem disabled={curPage === 1}>
           <PaginationLink
             previous

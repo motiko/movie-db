@@ -58,7 +58,12 @@ class CategoriesFilter extends Component {
     const { selectedIds, categories, isOpen } = this.state;
     return (
       <Dropdown nav inNavbar isOpen={isOpen} toggle={() => {}}>
-        <DropdownToggle nav caret onClick={this.toggle}>
+        <DropdownToggle
+          nav
+          caret
+          onClick={this.toggle}
+          disabled={categories.length === 0}
+        >
           Category
         </DropdownToggle>
         <DropdownMenu right>

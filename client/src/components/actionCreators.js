@@ -14,7 +14,19 @@ const fetchMovies = createAction(
       minRating,
       maxRating
     });
-    return { movies, totalPages };
+    let message = '';
+    if (movies.length === 0) {
+      if (query) {
+        message = `No movies found for ${query}`;
+      } else if (categories.length > 0) {
+        message = `No movies found in selected categories `;
+      } else if (minRating || maxRating) {
+        message = `No movies found with selected score`;
+      } else {
+        message = `No movies found`;
+      }
+    }
+    return { movies, totalPages, message };
   }
 );
 export { logIn, logOut, setPage, fetchMovies };

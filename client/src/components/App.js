@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import MoviesList from './MoviesList';
 import { Grid, GridContainer } from 'unsemantic';
 import MoviesPagination from './MoviesPagination';
+import Messages from './Messages';
 import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import { Provider } from 'react-redux';
@@ -14,6 +15,9 @@ class App extends Component {
       <div className="App">
         <Navigation />
         <GridContainer>
+          <Grid desktop="100">
+            <Messages />
+          </Grid>
           <Grid desktop="100">
             <MoviesPagination />
           </Grid>

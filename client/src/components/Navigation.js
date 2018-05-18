@@ -20,7 +20,7 @@ import RatingFilter from './RatingFilter';
 
 function Logo() {
   return (
-    <h1 style={{ color: 'grey', fontSize: '2.1rem' }}>
+    <h1 className="logo" style={{ color: 'grey', fontSize: '2.1rem' }}>
       {' '}
       <img alt="MovieDB" src="/movie_folder.png" /> MovieDB
     </h1>
