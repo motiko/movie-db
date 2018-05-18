@@ -18,7 +18,8 @@ MovieDB (like IMBD)
   - Clicking on a facet filters the movie list accordingly without a page reload
   - In the movie list, I want to be able to rate the movie without a page reload.
   - Next to it should be the buttons for C(R)UD actions if it’s the user’s movie
-  - Pagination for more than 10 items. The stars should use graphics (not bitmap)
+  - Pagination for more than 10 items.
+  - The stars should use graphics (not bitmap)
 - For creating the application, I would like to see the use of technologies Rails, Twitter Bootstrap, Unsemantic, React
 - Testing of the application is a must
 - Deployment on Heroku, code in Github
