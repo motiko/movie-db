@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.selected:before {
+  content: '\2713 ';
+}
+
+.not-selected:before {
+  content: '\2003';
+  white-space: pre;
+}
+
+.sumbittedRating {
+  font-size: 11px;
+  display: inline-block;
+  position: absolute;
+  margin-left: 0.5rem;
+  margin-top: 0.2rem;
+  color: green;
+}

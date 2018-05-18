@@ -1,0 +1,47 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:3001",
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "popper.js": "^1.14.3",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.2",
+    "react-click-outside": "^3.0.1",
+    "react-dom": "^16.3.2",
+    "react-popper": "^0.10.4",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.4",
+    "react-star-rating-component": "^1.4.1",
+    "react-svg-spinner": "^1.0.1",
+    "react-test-renderer": "^16.3.2",
+    "reactstrap": "^6.0.1",
+    "redux": "^4.0.0",
+    "redux-actions": "^2.3.2",
+    "redux-promise": "^0.5.3",
+    "unsemantic": "^1.2.3"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "debug": "NODE_ENV=debug npm test",
+    "eject": "react-scripts eject",
+    "cypress": "cypress open"
+  },
+  "devDependencies": {
+    "cypress": "^2.1.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.1.0",
+    "prettier": "^1.12.1"
+  }
+}
