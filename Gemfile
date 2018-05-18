@@ -28,11 +28,12 @@ gem 'pg_search'
 gem 'will_paginate', '~> 3.1.0'
 gem 'actionpack-action_caching'
 
+gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master' # Use faker to seed prod db for demo only
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'factory_bot_rails'
-  gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 3.1'
 end
