@@ -25,6 +25,15 @@ const reducer = handleActions(
         messageColor: 'success'
       };
     },
+    [action.createMovie](state, action) {
+      if (action.payload.errors) return state;
+      return {
+        ...state,
+        movies: [action.payload.movie, ...state.movies],
+        message: 'Movie created succesfully',
+        messageColor: 'success'
+      };
+    },
     [action.logOut](state) {
       return {
         ...state,
@@ -54,6 +63,7 @@ const reducer = handleActions(
     },
     [action.fetchMovies]: {
       next(state, action) {
+        console.log(0);
         const { movies, totalPages, message } = action.payload;
         if (message)
           return {

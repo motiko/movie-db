@@ -31,7 +31,7 @@ class MoviesPagination extends Component {
     }
     const displayPages = visiblePages(curPage, totalPages);
     return (
-      <Pagination className="pagination" style={{ marginTop: '1.5em' }}>
+      <Pagination className="pagination">
         <PaginationItem disabled={curPage === 1}>
           <PaginationLink
             previous

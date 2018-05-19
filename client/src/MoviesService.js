@@ -79,6 +79,27 @@ function deleteMovie(movieId) {
     .then(() => ({ movieId, removed: true }));
 }
 
+function createMovie(title, description, category) {
+  return fetch(`/movie/`, {
+    headers: headers(),
+    method: 'POST',
+    body: JSON.stringify({ title, description, category })
+  })
+    .then(checkErrors)
+    .then(json)
+    .then(({ movie, errors }) => {
+      if (errors) {
+        if (Array.isArray(errors)) return { errors: errors };
+        return {
+          errors: Reflect.ownKeys(errors).map(
+            field => `${field}: ${errors[field]}`
+          )
+        };
+      }
+      return { movie };
+    });
+}
+
 function logout() {
   localStorage.removeItem('email');
   localStorage.removeItem('token');
@@ -97,6 +118,9 @@ function checkErrors(response) {
   }
   if (response.status === 401) {
     logout();
+  }
+  if (response.status === 422) {
+    return response;
   }
   const error = new Error(`HTTP Error ${response.statusText}`);
   error.status = response.statusText;
@@ -118,7 +142,8 @@ const MoviesService = {
   logout,
   rate,
   listCategories,
-  deleteMovie
+  deleteMovie,
+  createMovie
 };
 
 export default MoviesService;

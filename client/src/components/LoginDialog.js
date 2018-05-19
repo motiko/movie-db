@@ -69,7 +69,7 @@ class LoginDialog extends Component {
   render() {
     const { isOpen } = this.props;
     return (
-      <div>
+      <React.Fragment>
         <Modal isOpen={isOpen} toggle={this.toggleState}>
           <ModalHeader>Login</ModalHeader>
           <Form>
@@ -109,7 +109,7 @@ class LoginDialog extends Component {
             </ModalFooter>
           </Form>
         </Modal>
-      </div>
+      </React.Fragment>
     );
   }
 }

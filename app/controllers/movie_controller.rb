@@ -9,15 +9,19 @@ class MovieController < ApplicationController
   class AuthorizationError < StandardError; end
 
   rescue_from AuthorizationError do
-    render json: { error: "User not authorized to perform this action on #{params[:id]}" }, status: :forbidden
+    render json: { errors: [ "User not authorized to perform this action on #{params[:id]}" ] }, status: :forbidden
   end
 
   rescue_from ActiveRecord::RecordInvalid do |ex|
-    render json: { error: ex.record.errors.messages }, status: :unprocessable_entity
+    render json: { errors: ex.record.errors.messages }, status: :unprocessable_entity
   end
 
   rescue_from ActiveRecord::RecordNotFound do |_e|
-    render json: { error: "Record #{params[:id]} not found" }
+    render json: { errors: [ "Record #{params[:id]} not found" ] }
+  end
+
+  rescue_from ArgumentError do |ex|
+    render json: { errors: [ ex.message ] }, status: :unprocessable_entity
   end
 
   def index
@@ -34,7 +38,7 @@ class MovieController < ApplicationController
   end
 
   def create
-    movie = Movie.new(title: params[:title], description: params[:description], user: current_user)
+    movie = Movie.new(title: params[:title], description: params[:description], user: current_user, score: 1)
     movie.category_name = params[:category]
     movie.save!
     render json: { movie: movie }

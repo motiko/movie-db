@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'unsemantic';
 import { CardDeck } from 'reactstrap';
 import PropTypes from 'prop-types';
 import MovieCard from './MovieCard';
 
-class MoviesList extends Component {
+class MoviesList extends PureComponent {
   static propTypes = {
     movies: PropTypes.array
   };
@@ -16,6 +16,7 @@ class MoviesList extends Component {
 
   render() {
     const { movies, userId } = this.props;
+    console.log(movies);
     return (
       <CardDeck>
         {movies.map(movie => (

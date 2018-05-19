@@ -72,12 +72,7 @@ class RatingFilter extends Component {
             />{' '}
           </DropdownItem>
           <DropdownItem>
-            <h6
-              style={{ marginBottom: '0px', marginTop: '3px' }}
-              className="text-muted float-left select-rating-label"
-            >
-              To{' '}
-            </h6>
+            <h6 className="text-muted float-left select-rating-label">To </h6>
             <StarRatingComponent
               name={'max'}
               starCount={5}
