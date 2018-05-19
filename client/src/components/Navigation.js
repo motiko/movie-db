@@ -56,7 +56,12 @@ class Navigation extends PureComponent {
           {userEmail ? (
             <React.Fragment>
               <NavItem>
-                <NavLink onClick={this.toggleMovieDialog}>＋Add Movie</NavLink>
+                <NavLink
+                  data-cy="open-movie-dialog"
+                  onClick={this.toggleMovieDialog}
+                >
+                  ＋Add Movie
+                </NavLink>
               </NavItem>
               <MovieDialog
                 isOpen={movieDialogOpen}

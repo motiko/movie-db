@@ -91,6 +91,7 @@ class MovieDialog extends Component {
                 type="text"
                 name="title"
                 id="titleInput"
+                data-cy="movie-title-input"
                 onChange={this.onChange('title')}
               />
             </FormGroup>
@@ -100,14 +101,16 @@ class MovieDialog extends Component {
                 type="textarea"
                 name="description"
                 id="descriptionInput"
+                data-cy="movie-description-input"
                 onChange={this.onChange('description')}
               />
             </FormGroup>
-            <Label for="descriptionInput">Category</Label>
+            <Label for="categorySelect">Category</Label>
             <Input
               type="select"
               name="select"
-              id="exampleSelect"
+              id="categorySelect"
+              data-cy="movie-category-select"
               onChange={this.onChange('category')}
             >
               {categories.map(category => (
@@ -124,7 +127,12 @@ class MovieDialog extends Component {
               ))}
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" type="submit" onClick={this.onSaveClick}>
+            <Button
+              data-cy="movie-save-btn"
+              color="primary"
+              type="submit"
+              onClick={this.onSaveClick}
+            >
               Save
             </Button>{' '}
             <Button color="secondary" onClick={this.toggleState}>

@@ -24,7 +24,7 @@ class MovieCard extends Component {
     const { movie, userId, deleteMovie } = this.props;
     return (
       <Card className="movie-card">
-        <CardHeader>{movie.title}</CardHeader>
+        <CardHeader data-cy="movie-view-title">{movie.title}</CardHeader>
         <CardBody>
           <CardSubtitle>
             <MovieRating
@@ -36,7 +36,9 @@ class MovieCard extends Component {
           {movie.category_name && (
             <Badge data-cy="movie-category"> {movie.category_name}</Badge>
           )}
-          <CardText>{movie.description}</CardText>
+          <CardText data-cy="movie-view-description">
+            {movie.description}
+          </CardText>
           {this.props.userId === movie.user_id && (
             <ButtonGroup>
               <Button data-cy="edit-movie">Edit</Button>

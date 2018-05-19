@@ -1,4 +1,3 @@
-
 describe('Pagination', () => {
   beforeEach(() => {
     cy.stubRoutes()
