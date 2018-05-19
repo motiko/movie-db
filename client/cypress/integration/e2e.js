@@ -3,7 +3,7 @@ describe('End to end test', () => {
     cy.log(
       'Running end to end tests. Make sure backend is available and the database is seed with test data.',
     )
-    cy.visit('http://localhost:3000/')
+    cy.visit('/')
     cy
       .get('.nav-item')
       .contains('Rating')
