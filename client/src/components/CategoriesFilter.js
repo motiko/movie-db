@@ -5,29 +5,27 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
-import MoviesService from '../MoviesService';
+import { connect } from 'react-redux';
+import { listCategories } from './actionCreators';
 import enhanceWithClickOutside from 'react-click-outside';
 import PropTypes from 'prop-types';
 
 class CategoriesFilter extends Component {
   static propTypes = {
-    onUpdate: PropTypes.func.isRequired
+    onUpdate: PropTypes.func.isRequired,
+    categories: PropTypes.array
   };
 
+  static defaultProps = {
+    categories: []
+  };
   state = {
-    categories: [],
     selectedIds: [],
     isOpen: false
   };
 
   componentDidMount() {
-    MoviesService.listCategories()
-      .then(({ categories }) => {
-        this.setState({ categories: categories });
-      })
-      .catch(er => {
-        this.setState({ categories: [] });
-      });
+    this.props.listCategories();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -55,7 +53,8 @@ class CategoriesFilter extends Component {
   };
 
   render() {
-    const { selectedIds, categories, isOpen } = this.state;
+    const { selectedIds, isOpen } = this.state;
+    const { categories } = this.props;
     return (
       <Dropdown nav inNavbar isOpen={isOpen} toggle={() => {}}>
         <DropdownToggle
@@ -85,4 +84,6 @@ class CategoriesFilter extends Component {
   }
 }
 
-export default enhanceWithClickOutside(CategoriesFilter);
+export default connect(state => ({ categories: state.categories }), {
+  listCategories
+})(enhanceWithClickOutside(CategoriesFilter));

@@ -5,6 +5,10 @@ const logIn = createAction('LOGIN', MoviesService.login);
 const logOut = createAction('LOGOUT', MoviesService.logout);
 const deleteMovie = createAction('DELETE_MOVIE', MoviesService.deleteMovie);
 const createMovie = createAction('CREATE_MOVIE', MoviesService.createMovie);
+const listCategories = createAction(
+  'FETCH_CATEGORIES',
+  MoviesService.listCategories
+);
 const setPage = createAction('SET_PAGE');
 const fetchMovies = createAction(
   'FETCH_MOVIES',
@@ -31,4 +35,12 @@ const fetchMovies = createAction(
     return { movies, totalPages, message };
   }
 );
-export { logIn, logOut, setPage, fetchMovies, deleteMovie, createMovie };
+export {
+  logIn,
+  logOut,
+  setPage,
+  fetchMovies,
+  deleteMovie,
+  createMovie,
+  listCategories
+};

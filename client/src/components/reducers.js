@@ -10,11 +10,16 @@ const defaultState = {
   totalPages: 0,
   curPage: 0,
   message: '',
-  messageColor: ''
+  messageColor: '',
+  categories: []
 };
 
 const reducer = handleActions(
   {
+    [action.listCategories](state, action) {
+      if (!action.payload.categories) return state;
+      return { ...state, categories: action.payload.categories };
+    },
     [action.logIn](state, action) {
       const { userId, userEmail } = action.payload;
       return {
@@ -25,14 +30,23 @@ const reducer = handleActions(
         messageColor: 'success'
       };
     },
-    [action.createMovie](state, action) {
-      if (action.payload.errors) return state;
-      return {
-        ...state,
-        movies: [action.payload.movie, ...state.movies],
-        message: 'Movie created succesfully',
-        messageColor: 'success'
-      };
+    [action.createMovie]: {
+      next(state, action) {
+        if (action.payload.errors) return state;
+        return {
+          ...state,
+          movies: [action.payload.movie, ...state.movies],
+          message: 'Movie created succesfully',
+          messageColor: 'success'
+        };
+      },
+      throw(state, action) {
+        return {
+          ...state,
+          message: `Unexpected error occured: ${action.payload.message}`,
+          messageColor: 'danger'
+        };
+      }
     },
     [action.logOut](state) {
       return {
@@ -63,7 +77,6 @@ const reducer = handleActions(
     },
     [action.fetchMovies]: {
       next(state, action) {
-        console.log(0);
         const { movies, totalPages, message } = action.payload;
         if (message)
           return {

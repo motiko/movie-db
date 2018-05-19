@@ -16,7 +16,6 @@ class MoviesList extends PureComponent {
 
   render() {
     const { movies, userId } = this.props;
-    console.log(movies);
     return (
       <CardDeck>
         {movies.map(movie => (

@@ -41,7 +41,7 @@ class MovieController < ApplicationController
     movie = Movie.new(title: params[:title], description: params[:description], user: current_user, score: 1)
     movie.category_name = params[:category]
     movie.save!
-    render json: { movie: movie }
+    render json: { movie: Movie.with_category.find(movie.id) }
   end
 
   def destroy

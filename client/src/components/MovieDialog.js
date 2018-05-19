@@ -18,17 +18,19 @@ import { connect } from 'react-redux';
 class MovieDialog extends Component {
   static propTypes = {
     isOpen: PropTypes.bool,
-    onToggle: PropTypes.func
+    onToggle: PropTypes.func,
+    categories: PropTypes.array
   };
 
   static defaultProps = {
-    isOpen: false
+    isOpen: false,
+    categories: []
   };
 
   static defaultState = {
     title: '',
     description: '',
-    category: null,
+    category: '',
     errors: []
   };
 
@@ -40,6 +42,9 @@ class MovieDialog extends Component {
   }
 
   componentDidMount() {
+    const { categories } = this.props;
+    if (categories && categories.length > 0)
+      this.setState({ category: categories[0] });
     this.focusTitle();
   }
 
@@ -62,20 +67,18 @@ class MovieDialog extends Component {
 
   onSaveClick = event => {
     event.preventDefault();
-    const { title, description } = this.state;
-    this.props
-      .createMovie(title, description, 'New Wave')
-      .then(({ payload }) => {
-        if (payload.errors) {
-          this.setState({ errors: payload.errors });
-        } else {
-          this.props.onToggle();
-        }
-      });
+    const { title, description, category } = this.state;
+    this.props.createMovie(title, description, category).then(({ payload }) => {
+      if (payload.errors) {
+        this.setState({ errors: payload.errors });
+      } else {
+        this.props.onToggle();
+      }
+    });
   };
 
   render() {
-    const { isOpen } = this.props;
+    const { isOpen, categories } = this.props;
     return (
       <Modal isOpen={isOpen} toggle={this.toggleState}>
         <ModalHeader>Movie</ModalHeader>
@@ -100,6 +103,19 @@ class MovieDialog extends Component {
                 onChange={this.onChange('description')}
               />
             </FormGroup>
+            <Label for="descriptionInput">Category</Label>
+            <Input
+              type="select"
+              name="select"
+              id="exampleSelect"
+              onChange={this.onChange('category')}
+            >
+              {categories.map(category => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}{' '}
+            </Input>
             {this.state.errors &&
               this.state.errors.map(error => (
                 <Alert color="danger" key={error}>
@@ -121,4 +137,6 @@ class MovieDialog extends Component {
   }
 }
 
-export default connect(null, { createMovie })(MovieDialog);
+export default connect(state => ({ categories: state.categories }), {
+  createMovie
+})(MovieDialog);
