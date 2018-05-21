@@ -1,4 +1,54 @@
-Assignment for Applicants
+
+# Local Build
+## Server side (Rails)
+### Build
+Clone repo and run in project directory 
+```
+$ bundle install
+$ rake db:create
+$ rake db:migrate
+$ rake db:seed
+```
+### Run
+```
+$ bin/rails s -p 3001
+```
+### Test
+```
+rspec spec 
+```
+## Client side(react)
+### Build
+```
+$ cd client
+$ npm install
+```
+### Run
+```
+$ npm start 
+```
+### Test
+For the end to end tests to work make sure the DB is populated with `rake db:seed`, and both backend and fronted are running, easiest way is to run `foreman start -f Procfile.dev` 
+from project root directory. 
+Or run `bin/rails s -p 3001` from root directory
+and `npm start` from client directory in separate terminals.
+
+```
+$ npm run cypress
+``` 
+### Deployment to heroku
+
+With heroku-cli installed run following commands
+```
+$ heroku create
+$ heroku buildpacks:add heroku/nodejs --index 1
+$ git push heroku master
+$ heroku run rake db:migrate
+$ heroku run rake db:seed
+```
+
+
+# Assignment for Applicants
 
 MovieDB (like IMBD)
 
