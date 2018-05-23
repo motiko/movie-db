@@ -1,3 +1,11 @@
+# Demo 
+
+Live version with demo data can be viewed at [Heroku](https://radiant-fjord-72608.herokuapp.com/)  
+### Demo accounts :
+test1@moviedb.com  
+123123  
+test2@moviedb.com  
+123123  
 
 # Local Build
 ## Server side (Rails)
